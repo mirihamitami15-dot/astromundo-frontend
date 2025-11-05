@@ -4,7 +4,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavegacionEstelar from './components/NavegacionEstelar';
 import BibliotecaJuegos from './pages/BibliotecaJuegos';
 import EstadisticasPersonales from './pages/EstadisticasPersonales';
-// Importaremos el FormularioJuego después
+import FormularioJuego from './pages/FormularioJuego';
+
 
 import './styles/Global.css'; 
 
@@ -12,13 +13,18 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<NavegacionEstelar />}>
-          {/* Rutas Hijas */}
-          <Route index element={<BibliotecaJuegos />} /> {/* Ruta principal: / */}
-          {/* <Route path="agregar" element={<FormularioJuego />} /> */} 
-          <Route path="estadisticas" element={<EstadisticasPersonales />} />
-
-          {/* Ruta para capturar errores 404 */}
+        {/* RUTA PADRE: Renderiza NavegacionEstelar y define el layout */}
+        <Route path="/" element={<NavegacionEstelar />}> 
+          
+          {/* RUTAS HIJAS: Se renderizan dentro del <Outlet /> de NavegacionEstelar */}
+          <Route index element={<BibliotecaJuegos />} /> {/* Ruta: / */}
+          
+          <Route path="agregar" element={<FormularioJuego />} />
+          
+          <Route path="agregar" element={<FormularioJuego />} /> {/* Ruta: /agregar */}
+          
+          <Route path="estadisticas" element={<EstadisticasPersonales />} /> {/* Ruta: /estadisticas */}
+          
           <Route path="*" element={<h2>¡404! Navegación fuera del mapa estelar.</h2>} />
         </Route>
       </Routes>
