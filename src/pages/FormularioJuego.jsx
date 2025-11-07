@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function FormularioJuego() {
   // Estado inicial para el formulario
@@ -24,11 +25,27 @@ export default function FormularioJuego() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // **Aquí irá la función para conectar con Axios y el Backend**
-    console.log('Datos listos para enviar:', formData);
+    // ... dentro del componente FormularioJuego ...
 
-    // Simular redirección
-    // navigate('/'); 
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    // Asegúrate de que tu Backend esté corriendo en el puerto 4000
+    const API_URL = 'http://localhost:4000/api/juegos';
+
+    const response = await axios.post(API_URL, formData);
+
+    console.log('Misión registrada con éxito:', response.data);
+
+    // **Éxito:** Redirigir a la biblioteca después de guardar
+    navigate('/'); 
+
+  } catch (error) {
+    console.error('❌ Error al registrar la misión (POST):', error.response ? error.response.data : error.message);
+    alert('Hubo un error al registrar la misión. Revisa la consola y el Backend.');
+  }
+};
   };
 
   return (
