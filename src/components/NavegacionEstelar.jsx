@@ -13,7 +13,6 @@ export default function NavegacionEstelar() {
           <Link to="/estadisticas">Bitácora de Vuelo</Link>
         </div>
       </nav>
-      {/* El Outlet renderiza el componente de la ruta activa */}
       <div className="contenedor-principal">
         <Outlet />
       </div>

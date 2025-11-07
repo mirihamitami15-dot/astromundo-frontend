@@ -6,7 +6,6 @@ import BibliotecaJuegos from './pages/BibliotecaJuegos';
 import EstadisticasPersonales from './pages/EstadisticasPersonales';
 import FormularioJuego from './pages/FormularioJuego';
 
-
 import './styles/Global.css'; 
 
 export default function App() {
@@ -18,8 +17,6 @@ export default function App() {
           
           {/* RUTAS HIJAS: Se renderizan dentro del <Outlet /> de NavegacionEstelar */}
           <Route index element={<BibliotecaJuegos />} /> {/* Ruta: / */}
-          
-          <Route path="agregar" element={<FormularioJuego />} />
           
           <Route path="agregar" element={<FormularioJuego />} /> {/* Ruta: /agregar */}
           
