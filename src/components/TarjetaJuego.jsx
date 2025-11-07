@@ -1,5 +1,7 @@
 // src/components/TarjetaJuego.jsx (Card individual de cada juego)
 
+import { Link } from 'react-router-dom';
+
 // 1. Recibe las props mision Y onDelete
 export default function TarjetaJuego({ mision, onDelete }) { 
   return (
@@ -22,16 +24,21 @@ export default function TarjetaJuego({ mision, onDelete }) {
 
       
       <div className="acciones-mision">
-        <button className="btn-editar">Editar</button>
-        
-        {/* 2.El botón llama a la función onDelete, pasándole el _id */}
-        <button 
-          className="btn-eliminar"
-          onClick={() => onDelete(mision._id)} // <-- Lógica de eliminación
-        >
-          Eliminar
-        </button>
-      </div>
+    
+    <Link 
+        to={`/editar/${mision._id}`} 
+        className="btn-editar"
+    >
+        Editar
+    </Link>
+    
+    <button 
+      className="btn-eliminar"
+      onClick={() => onDelete(mision._id)} 
+    >
+      Eliminar
+    </button>
+  </div>
     </div>
   );
 }
