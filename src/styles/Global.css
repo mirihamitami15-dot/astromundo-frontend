@@ -1,0 +1,119 @@
+/* src/styles/Global.css */
+
+/* Variables de Color (Tema Estelar) */
+:root {
+  --color-fondo: #0a0e14; /* Azul muy oscuro */
+  --color-principal: #6a82fb; /* Azul neón/eléctrico */
+  --color-secundario: #4054a8; /* Azul más apagado */
+  --color-texto-claro: #e9e9f2; /* Blanco roto */
+  --color-completo: #32d66d; /* Verde para Completado */
+  --color-jugando: #ffc700; /* Amarillo para Jugando */
+}
+
+/* Base */
+body {
+  background-color: var(--color-fondo);
+  color: var(--color-texto-claro);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3 {
+  color: var(--color-principal);
+}
+
+/* Layout Principal */
+.contenedor-principal {
+  padding: 20px;
+}
+
+/* Barra de Navegación */
+.barra-navegacion {
+  background-color: var(--color-principal);
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.barra-navegacion a {
+  color: var(--color-texto-claro);
+  text-decoration: none;
+  margin-left: 20px;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.barra-navegacion a:hover {
+  color: #ffffff;
+}
+
+/* Contenedor de Tarjetas */
+.contenedor-tarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* Tarjeta Juego */
+.tarjeta-juego {
+  background-color: var(--color-secundario);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  border-left: 5px solid var(--color-principal);
+}
+
+/* Estilos específicos por Estado */
+.completado {
+  border-left-color: var(--color-completo);
+}
+
+.jugando {
+  border-left-color: var(--color-jugando);
+}
+
+/* Botones */
+.acciones-mision button {
+  padding: 8px 15px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-eliminar {
+  background-color: #d63232;
+  color: white;
+}
+
+.btn-editar {
+  background-color: var(--color-principal);
+  color: white;
+}
+
+/* Formulario */
+.form-nave label, .form-nave input, .form-nave select {
+  display: block;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.form-nave input, .form-nave select {
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid var(--color-principal);
+  background-color: #1a202c;
+  color: var(--color-texto-claro);
+}
+
+.btn-navegar {
+    background-color: var(--color-principal);
+    color: white;
+    padding: 12px 20px !important;
+    margin-top: 15px;
+}
