@@ -1,96 +1,61 @@
 // src/pages/FormularioJuego.jsx (Vista para Agregar/Editar Juegos)
 
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-
 export default function FormularioJuego() {
-  // Estado inicial para el formulario
-  const [formData, setFormData] = useState({
-    titulo: '',
-    plataforma: 'PC', // Valor por defecto
-    estado: 'Pendiente', // Valor por defecto
-    horasJugadas: 0,
-  });
+  const { id } = useParams(); // Obtiene el ID si estamos en /editar/:id
+  const navigate = useNavigate(); 
+  const [formData, setFormData] = useState({ /* ... estado inicial ... */ });
 
-  const navigate = useNavigate(); // Hook para redirigir después de guardar
+  const esEdicion = !!id; // Verdadero si hay un ID en la URL
+  const tituloPagina = esEdicion ? '✍️ Editar Misión' : '📝 Registrar Nueva Misión';
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
+  // **Efecto para CARGAR datos si estamos EDITANDO**
+  useEffect(() => {
+    if (esEdicion) {
+      axios.get(`${API_URL}/${id}`)
+        .then(response => {
+          // Si la carga es exitosa, establece el estado con los datos del juego
+          setFormData(response.data);
+        })
+        .catch(error => {
+          console.error('Error al cargar datos del juego:', error);
+          alert('Error al cargar la misión para editar.');
+        });
+    }
+  }, [id, esEdicion]); // Se ejecuta cuando el ID cambie
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => { /* ... se mantiene igual ... */ };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // ... dentro del componente FormularioJuego ...
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+    try {
+      if (esEdicion) {
+        // **MODO EDICIÓN (PUT)**
+        await axios.put(`${API_URL}/${id}`, formData);
+        alert('Misión actualizada con éxito.');
+      } else {
+        // **MODO CREACIÓN (POST)**
+        await axios.post(API_URL, formData);
+        alert('Misión registrada con éxito.');
+      }
 
-  try {
-    // Asegúrate de que tu Backend esté corriendo en el puerto 4000
-    const API_URL = 'http://localhost:4000/api/juegos';
+      navigate('/'); // Redirigir a la biblioteca
 
-    const response = await axios.post(API_URL, formData);
-
-    console.log('Misión registrada con éxito:', response.data);
-
-    // **Éxito:** Redirigir a la biblioteca después de guardar
-    navigate('/'); 
-
-  } catch (error) {
-    console.error('❌ Error al registrar la misión (POST):', error.response ? error.response.data : error.message);
-    alert('Hubo un error al registrar la misión. Revisa la consola y el Backend.');
-  }
-};
+    } catch (error) {
+      console.error('❌ Error en la transacción:', error.response ? error.response.data : error.message);
+      alert(`Hubo un error: ${error.response?.data?.message || error.message}`);
+    }
   };
+
+  // ... el resto del código (inputs y select, se mantiene igual) ...
 
   return (
     <section className="formulario-mision">
-      <h2>📝 Registrar Nueva Misión</h2>
-      <form onSubmit={handleSubmit} className="form-nave">
-
-        <label>Título de la Misión (Juego):</label>
-        <input 
-          type="text" 
-          name="titulo" 
-          value={formData.titulo} 
-          onChange={handleChange} 
-          required
-        />
-
-        <label>Plataforma de Despegue:</label>
-        <select name="plataforma" value={formData.plataforma} onChange={handleChange}>
-          <option value="PC">PC</option>
-          <option value="PlayStation">PlayStation</option>
-          <option value="Xbox">Xbox</option>
-          <option value="Nintendo">Nintendo</option>
-          <option value="Móvil">Móvil</option>
-          <option value="Otro">Otro</option>
-        </select>
-
-        <label>Estado de la Misión:</label>
-        <select name="estado" value={formData.estado} onChange={handleChange}>
-          <option value="Pendiente">Pendiente</option>
-          <option value="Jugando">Jugando</option>
-          <option value="Completado">Completado</option>
-          <option value="Abandonado">Abandonado</option>
-        </select>
-
-        <label>Horas de Vuelo (Jugadas):</label>
-        <input 
-          type="number" 
-          name="horasJugadas" 
-          value={formData.horasJugadas} 
-          onChange={handleChange} 
-          min="0"
-        />
-
-        <button type="submit" className="btn-navegar">Registrar Misión</button>
-      </form>
+      <h2>{tituloPagina}</h2> {/* Usa el título dinámico */}
+      {/* ... el resto del formulario ... */}
+      <button type="submit" className="btn-navegar">
+        {esEdicion ? 'Guardar Cambios' : 'Registrar Misión'} {/* Texto dinámico del botón */}
+      </button>
     </section>
   );
 }
