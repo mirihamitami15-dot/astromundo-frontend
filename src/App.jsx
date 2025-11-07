@@ -23,6 +23,8 @@ export default function App() {
           
           <Route path="agregar" element={<FormularioJuego />} /> {/* Ruta: /agregar */}
           
+          <Route path="editar/:id" element={<FormularioJuego />} />
+
           <Route path="estadisticas" element={<EstadisticasPersonales />} /> {/* Ruta: /estadisticas */}
           
           <Route path="*" element={<h2>¡404! Navegación fuera del mapa estelar.</h2>} />
