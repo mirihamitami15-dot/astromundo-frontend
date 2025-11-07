@@ -1,22 +1,36 @@
 // src/components/TarjetaJuego.jsx (Card individual de cada juego)
 
-// Recibe el objeto del juego como 'mision' (prop)
-export default function TarjetaJuego({ mision }) { 
+// 1. Recibe las props mision Y onDelete
+export default function TarjetaJuego({ mision, onDelete }) { 
   return (
+    // Se mantiene la estructura y la clase dinámica
     <div className={`tarjeta-juego ${mision.estado.toLowerCase()}`}>
+      
+      
       <div className="portada-nave">
-        {/* Aquí iría la portada del juego o una imagen de nave */}
+        {/* Aquí iria la portada del juego o una imagen de nave */}
         <span className="estado-mision">Estado: {mision.estado}</span>
       </div>
+
+      
       <div className="info-mision">
         <h3>{mision.titulo}</h3>
         <p>Plataforma: {mision.plataforma}</p>
         <p className="horas-vuelo">Horas de Vuelo: {mision.horasJugadas}</p>
-        {/* Aquí se mostraría la puntuación de estrellas [cite: 59] */}
+        [cite_start]{/* Aquí se mostraría la puntuación de estrellas [cite: 59] */}
       </div>
+
+      
       <div className="acciones-mision">
         <button className="btn-editar">Editar</button>
-        <button className="btn-eliminar">Eliminar</button>
+        
+        {/* 2.El botón llama a la función onDelete, pasándole el _id */}
+        <button 
+          className="btn-eliminar"
+          onClick={() => onDelete(mision._id)} // <-- Lógica de eliminación
+        >
+          Eliminar
+        </button>
       </div>
     </div>
   );

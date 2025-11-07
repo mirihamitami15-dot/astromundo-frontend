@@ -48,4 +48,37 @@ export default function BibliotecaJuegos() {
       </div>
     </section>
   );
+
+const eliminarJuego = async (id) => {
+  try {
+    await axios.delete(`${API_URL}/${id}`); 
+
+    // Actualiza el estado: filtra el juego eliminado de la lista localmente
+    setJuegos(prevJuegos => prevJuegos.filter(j => j._id !== id));
+
+    alert('Misión eliminada con éxito.');
+
+  } catch (error) {
+    console.error('Error al eliminar la misión:', error);
+  }
+};
+
+// ...
+return (
+  // ...
+  <div className="contenedor-tarjetas">
+    {juegos.length === 0 ? (
+      <p>Tu biblioteca está vacía. ¡Registra una nueva misión!</p>
+    ) : (
+      juegos.map(juego => (
+        // Pasa la función eliminarJuego como prop a la tarjeta
+        <TarjetaJuego 
+          key={juego._id} 
+          mision={juego} 
+          onDelete={eliminarJuego} 
+        /> 
+      ))
+    )}
+  </div>
+);
 }
