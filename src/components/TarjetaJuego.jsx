@@ -27,7 +27,6 @@ export default function TarjetaJuego({ mision, onDelete }) {
         <h3>{mision.titulo}</h3>
         <p>Plataforma: {mision.plataforma}</p>
         <p className="horas-vuelo">Horas de Vuelo: {mision.horasJugadas}</p>
-        [cite_start]
       </div>
 
       

@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const API_URL = 'http://localhost:4000/api/reseñas'; 
+const API_URL = 'http://localhost:4000/api/reviews';
 
 export default function ListaReseñas({ juegoId, recargar }) {
   const [reseñas, setReseñas] = useState([]);
@@ -12,7 +12,6 @@ export default function ListaReseñas({ juegoId, recargar }) {
   const cargarReseñas = async () => {
     setLoading(true);
     try {
-     
       const response = await axios.get(`${API_URL}/${juegoId}`); 
       setReseñas(response.data);
     } catch (error) {
@@ -25,7 +24,20 @@ export default function ListaReseñas({ juegoId, recargar }) {
 
   useEffect(() => {
     cargarReseñas();
-  }, [juegoId, recargar]); // Se recarga cuando el juegoId o la bandera 'recargar' cambian
+  }, [juegoId, recargar]); 
+
+  // Función auxiliar para renderizar el grupo de estrellas
+  const renderEstrellas = (puntuacion) => {
+    const estrellasLlenas = '⭐'.repeat(puntuacion);
+    const estrellasVacias = '☆'.repeat(5 - puntuacion); 
+
+    return (
+      <span className="puntuacion-lectura">
+        <span className="on">{estrellasLlenas}</span>
+        <span className="off">{estrellasVacias}</span>
+      </span>
+    );
+  };
 
   if (loading) {
     return <p>Cargando registros...</p>;
@@ -39,7 +51,11 @@ export default function ListaReseñas({ juegoId, recargar }) {
       ) : (
         reseñas.map(res => (
           <div key={res._id} className="reseña-item">
-            <p>⭐ Puntuación: {res.puntuacion}/5</p>
+            <p>
+                {/* IMPLEMENTACIÓN DE ESTRELLAS VISUALES */}
+                {renderEstrellas(res.puntuacion)}
+                ({res.puntuacion}/5)
+            </p>
             <p>{res.texto}</p>
             <small>Fecha: {new Date(res.fecha).toLocaleDateString()}</small>
           </div>

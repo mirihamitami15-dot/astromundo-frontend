@@ -65,6 +65,7 @@ h1, h2, h3 {
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   border-left: 5px solid var(--color-principal);
+  padding-bottom: 5px; /* Reducción de padding implementada */
 }
 
 /* Estilos específicos por Estado */
@@ -76,14 +77,32 @@ h1, h2, h3 {
   border-left-color: var(--color-jugando);
 }
 
-/* Botones */
-.acciones-mision button {
+/* ==================================== */
+/* === SECCIÓN DE BOTONES FLEXBOX === */
+/* ==================================== */
+
+.acciones-mision {
+    display: flex; /* Habilita Flexbox */
+    gap: 10px; /* Espacio uniforme de 10px entre elementos */
+    margin-top: 15px; 
+    margin-bottom: 5px;
+    flex-wrap: wrap; 
+}
+
+/* Limpieza y Estilo de Botones/Links en la sección */
+.acciones-mision button, .acciones-mision a { 
+  /* Estilos base para todos los elementos */
   padding: 8px 15px;
-  margin-right: 10px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-weight: 600;
+  
+  /* Limpieza de estilos antiguos para evitar conflictos con 'gap' */
+  margin-right: 0px !important; 
+  margin-top: 0px !important;
+  text-decoration: none;
+  text-align: center;
 }
 
 .btn-eliminar {
@@ -96,7 +115,13 @@ h1, h2, h3 {
   color: white;
 }
 
-/* Formulario */
+/* Aplica el estilo de botón al Link de Editar */
+.acciones-mision a.btn-editar {
+    text-decoration: none;
+    text-align: center;
+}
+
+/* Formulario Principal */
 .form-nave label, .form-nave input, .form-nave select {
   display: block;
   margin-bottom: 10px;
@@ -116,4 +141,132 @@ h1, h2, h3 {
     color: white;
     padding: 12px 20px !important;
     margin-top: 15px;
+}
+
+/* 1. Estilos de la Puntuación con Estrellas */
+.star-rating {
+    margin-bottom: 15px;
+    display: inline-block; 
+    line-height: 1; 
+}
+
+.star-rating span {
+    cursor: pointer;
+    font-size: 28px; 
+    transition: color 0.2s;
+    margin-right: 2px;
+}
+
+.star-rating .on {
+    color: gold; /* Estrella seleccionada/hover */
+}
+
+.star-rating .off {
+    color: #555; /* Estrella no seleccionada */
+}
+
+/* Estilo para la puntuación en la lista */
+.puntuacion-lectura {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: gold;
+    margin-right: 10px;
+    display: inline-block;
+}
+
+/* 2. Estilos de la Sección de Reseñas */
+
+.area-reseñas-extendida {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(106, 130, 251, 0.3); /* Línea divisoria suave */
+}
+
+.lista-reseñas-contenedor h4 {
+    margin-bottom: 15px;
+    color: var(--color-texto-claro);
+    border-bottom: 1px solid rgba(106, 130, 251, 0.15);
+    padding-bottom: 5px;
+}
+
+.reseña-item {
+    background-color: rgba(64, 84, 168, 0.3); /* Un fondo ligeramente más claro */
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.reseña-item small {
+    display: block;
+    margin-top: 5px;
+    color: #bbb;
+    font-style: italic;
+}
+
+/* 3. Formulario de Reseñas */
+.form-reseña h4 {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    color: var(--color-completo); /* Color verde para distinguir */
+}
+
+.form-reseña label {
+    display: block; 
+    margin-right: 15px;
+    font-weight: bold;
+}
+
+.form-reseña input[type="number"], .form-reseña textarea {
+    background-color: #1a202c;
+    border: 1px solid var(--color-secundario);
+    color: var(--color-texto-claro);
+    padding: 8px;
+    border-radius: 4px;
+    width: 98%; 
+    margin-bottom: 15px;
+}
+
+.form-reseña textarea {
+    resize: vertical;
+}
+
+.btn-navegar-secundario {
+    background-color: var(--color-completo);
+    color: var(--color-fondo);
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.lista-logros h3 {
+    border-bottom: 2px solid var(--color-principal);
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+}
+
+.logro-item {
+    background-color: #1a202c; /* Color oscuro para el fondo del logro */
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.logro-nombre {
+    font-weight: bold;
+    color: var(--color-completo); /* Color verde para el nombre del logro */
+}
+
+.logro-desc {
+    font-size: 0.9em;
+    color: #ccc;
+    margin-top: 5px;
+}
+
+.logro-porcentaje {
+    font-weight: 600;
+    color: #ffc700; /* Color amarillo/jugando para que resalte */
+    font-size: 0.9em;
 }
