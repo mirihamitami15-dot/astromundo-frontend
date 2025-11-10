@@ -352,3 +352,41 @@ h1, h2, h3 {
 .input-busqueda:focus {
     outline: none; /* Eliminar el contorno feo al hacer foco */
 }
+
+/*(Estilos para el Dashboard*/
+
+.tarjetas-estadisticas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.stat-card {
+  background-color: var(--color-secundario);
+  padding: 25px;
+  border-radius: 8px;
+  text-align: center;
+  border-bottom: 5px solid var(--color-principal);
+}
+
+.stat-card h3 {
+  font-size: 2.5em;
+  margin: 0 0 5px 0;
+  color: var(--color-texto-claro); /* El número principal es blanco */
+}
+
+.stat-card p {
+  margin: 0;
+  font-size: 0.9em;
+  color: #bbb;
+}
+
+/* Estilos específicos */
+.stat-card.completo {
+    border-bottom-color: var(--color-completo); /* Verde para completados */
+}
+
+.stat-card.horas {
+    border-bottom-color: var(--color-jugando); /* Amarillo para horas */
+}
