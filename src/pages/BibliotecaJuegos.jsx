@@ -1,4 +1,4 @@
-// src/pages/BibliotecaJuegos.jsx (CON BÚSQUEDA Y FILTRO)
+// src/pages/BibliotecaJuegos.jsx 
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -12,12 +12,11 @@ export default function BibliotecaJuegos() {
 
   // Nuevos estados para la búsqueda y filtro
   const [busqueda, setBusqueda] = useState('');
-  const [filtroEstado, setFiltroEstado] = useState(''); // 'Jugando', 'Completado', etc.
+  const [filtroEstado, setFiltroEstado] = useState(''); 
 
   const cargarJuegos = async () => {
     setLoading(true);
     try {
-      // Si implementáramos filtros en el backend, los enviaríamos aquí como query params.
       const response = await axios.get(API_URL);
       setJuegos(response.data); 
     } catch (error) {
@@ -63,15 +62,21 @@ export default function BibliotecaJuegos() {
     <section className="biblioteca-juegos">
       <h2>🌠 Biblioteca Estelar de Juegos</h2>
 
-      {/* BARRA DE FILTROS Y BÚSQUEDA */}
+      {/* BARRA DE FILTROS Y BÚSQUEDA (MODIFICADA CON ICONO) */}
       <div className="barra-filtros">
-          <input
-              type="text"
-              placeholder="Buscar misión por título (Ej: Phasmofobia)..."
-              value={busqueda}
-              onChange={(e) => setBusqueda(e.target.value)}
-              className="input-busqueda"
-          />
+          {/* Contenedor Flex para el Icono y el Input */}
+          <div className="contenedor-busqueda-icono">
+              <span className="icono-busqueda">🔍</span> 
+              <input
+                  type="text"
+                  placeholder="Buscar misión o juego en el catálogo..."
+                  value={busqueda}
+                  onChange={(e) => setBusqueda(e.target.value)}
+                  className="input-busqueda"
+              />
+          </div>
+          
+          {/* Selector de Filtro de Estado */}
           <select value={filtroEstado} onChange={(e) => setFiltroEstado(e.target.value)} className="select-filtro">
               <option value="">Filtrar por Estado...</option>
               <option value="Jugando">Jugando</option>
